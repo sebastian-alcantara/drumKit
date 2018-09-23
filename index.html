@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Drum kit</title>
+    <link rel="stylesheet" type="text/css" href="miEstilo.css">
+</head>
+<body>
+    <div class="keys">
+        <div data-key="65" class="key" id="65">
+            <kbd>A</kbd>
+            <span class="sound">clap</span>
+        </div>
+        <div data-key="83" class="key" id="83">
+            <kbd>S</kbd>
+            <span class="sound">clap</span>
+        </div>
+        <div data-key="68" class="key" id="68">
+            <kbd>D</kbd>
+            <span class="sound">clap</span>
+        </div>
+        <div data-key="70" class="key" id="70">
+            <kbd>F</kbd>
+            <span class="sound">clap</span>
+        </div>
+        <div data-key="71" class="key" id="71">
+            <kbd>G</kbd>
+            <span class="sound">clap</span>
+        </div>
+        <div data-key="72" class="key" id="72">
+            <kbd>H</kbd>
+            <span class="sound">clap</span>
+        </div>
+        <div data-key="74" class="key" id="74">
+            <kbd>J</kbd>
+            <span class="sound">clap</span>
+        </div>
+        <div data-key="75" class="key" id="75">
+            <kbd>K</kbd>
+            <span class="sound">clap</span>
+        </div>
+        <div data-key="76" class="key" id="76">
+            <kbd>l</kbd>
+            <span class="sound">clap</span>
+        </div>
+    </div>
+
+    <audio data-key="65" src="sounds/rh55-009.wav"></audio>
+    <audio data-key="83" src="sounds/rh55-012.wav"></audio>
+    <audio data-key="68" src="sounds/rh55-016.wav"></audio>
+    <audio data-key="70" src="sounds/rh55-019.wav"></audio>
+    <audio data-key="71" src="sounds/rh55-023.wav"></audio>
+    <audio data-key="72" src="sounds/rh55-026.wav"></audio>
+    <audio data-key="74" src="sounds/rh55-028.wav"></audio>
+    <audio data-key="75" src="sounds/rh55-030.wav"></audio>
+    <audio data-key="76" src="sounds/rh55-034.wav"></audio>
+
+
+<script>
+
+    function playSound (evento) {
+        const audio = document.querySelector(`audio[data-key='${evento.keyCode}']`);
+        const key = document.querySelector(`.key[data-key='${evento.keyCode}']`);
+        if(!audio) return; // frena la función
+        audio.currentTime = 0; // vuelve el sonido al principio
+        audio.play();
+        key.classList.add("playing");
+    }
+
+    function playSound2 (evento) {
+        console.log(evento.currentTarget.id);
+        const audio = document.querySelector(`audio[data-key='${evento.currentTarget.id}']`);
+        const key = document.querySelector(`.key[data-key='${evento.currentTarget.id}']`);
+        if(!audio) return; // frena la función
+        audio.currentTime = 0; // vuelve el sonido al principio
+        audio.play();
+        key.classList.add("playing");
+    }
+
+    function removeTransition(evento) {
+        if(evento.propertyName !== "transform") return; // salta el cambio si no es transform
+        this.classList.remove("playing");
+    }
+
+    const keys = document.querySelectorAll(".key");
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+    
+    keys.forEach(key => key.addEventListener("click", playSound2));
+
+    window.addEventListener("keydown", playSound);
+
+</script>
+
+</body>
+</html>
