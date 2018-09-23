@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-image: linear-gradient( hsl(251, 1%, 95%), hsl(230, 30%, 80%));
+    background-image: linear-gradient( hsl(251, 70%, 95%), hsl(230, 70%, 80%));
     height: 100vh;
 }
 
