@@ -68,7 +68,8 @@
     }
 
     function playSound2 (evento) {
-        console.log(evento.currentTarget.id);
+        //console.log(evento.currentTarget.id);
+        event.preventDefault();
         const audio = document.querySelector(`audio[data-key='${evento.currentTarget.id}']`);
         const key = document.querySelector(`.key[data-key='${evento.currentTarget.id}']`);
         if(!audio) return; // frena la función
