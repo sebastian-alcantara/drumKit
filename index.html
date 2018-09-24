@@ -94,6 +94,7 @@
     keys.forEach(key => key.addEventListener('transitionend', removeTransition));
     
     keys.forEach(key => key.addEventListener("click", playSound2));
+    keys.forEach(key => key.addEventListener("touchstart", playSound2));
 
     window.addEventListener("keydown", playSound);
 
